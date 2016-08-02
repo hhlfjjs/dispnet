@@ -403,6 +403,7 @@ message LayerParameter {
   optional ThresholdParameter threshold_param = 128;
   optional TileParameter tile_param = 138;
   optional WindowDataParameter window_data_param = 129;
+  optional WriterParameter writer_param = 3001;
 }
 
 // Message that stores parameters used to apply transformation
@@ -1396,4 +1397,12 @@ message PReLUParameter {
   optional FillerParameter filler = 1;
   // Whether or not slope paramters are shared across channels.
   optional bool channel_shared = 2 [default = false];
+}
+message WriterParameter {
+  optional string file = 1 [default=""];
+  optional string folder = 2 [default=""];
+  optional string prefix = 3 [default=""];
+  optional string suffix = 4 [default=""];
+  optional bool normalize = 5 [default=false];
+  optional float scale = 6 [default=1];
 }

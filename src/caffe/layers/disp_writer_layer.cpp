@@ -96,6 +96,8 @@ void DISPWriterLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     int iter = net->iter();
 
     int size=height*width*channels;
+    printf("right here\n");
+    printf("num:%d\n",num);
     for(int n=0; n<num; n++)
     {
         char filename[256];

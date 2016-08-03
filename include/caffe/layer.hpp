@@ -19,6 +19,8 @@ namespace boost { class mutex; }
 
 namespace caffe {
 
+template <typename Dtype> class Net;
+
 /**
  * @brief An interface for the units of computation which can be composed into a
  *        Net.
@@ -115,7 +117,12 @@ class Layer {
         << type() << "Layer does not support sharing.";
     is_shared_ = is_shared;
   }
-
+  inline void SetNet(Net<Dtype>* net) {
+    this->net_ = net;
+  }
+  inline Net<Dtype>* GetNet() {
+    return this->net_;
+  }
   /**
    * @brief Adjust the shapes of top blobs and internal buffers to accommodate
    *        the shapes of the bottom blobs.
@@ -430,7 +437,8 @@ class Layer {
  private:
   /** Whether this layer is actually shared by other nets*/
   bool is_shared_;
-
+  
+  Net<Dtype>* net_;
   /** The mutex for sequential forward if this layer is shared */
   shared_ptr<boost::mutex> forward_mutex_;
 
